@@ -21,14 +21,9 @@ console.log("MONGO_DB_URL:", process.env.MONGO_DB_URL);
 connection();
 
 const app = express();
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
 app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 })); // Maximum file size is up to 10MB
 app.use(express.static("public"));
+app.use(cors());
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
@@ -41,12 +36,12 @@ const apolloServer = new ApolloServer({
   introspection: true,
   playground: true,
 });
-apolloServer.applyMiddleware({ app, path: "/", cors: false });
+apolloServer.applyMiddleware({ app });
 
 const port = process.env.PORT || 4000;
 
 app.listen({ port }, () => {
   console.log(
-    `🚀Server ready at http://localhost:${port}${apolloServer.graphqlPath}`
+    `🚀Server ready at http://localhost:${port}${apolloServer.graphqlPath} - TEST2`
   );
 });
