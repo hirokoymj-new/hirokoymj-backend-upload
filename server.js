@@ -33,8 +33,8 @@ const apolloServer = new ApolloServer({
   dataSources: () => ({
     weatherAPI: new WeatherAPI(),
   }),
-  introspection: true,
-  playground: true,
+  // introspection: true,
+  // playground: true,
 });
 apolloServer.applyMiddleware({ app });
 
