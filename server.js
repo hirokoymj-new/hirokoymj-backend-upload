@@ -9,16 +9,11 @@ const typeDefs = require("./typeDefs");
 const { connection } = require("./database/util");
 const WeatherAPI = require("./datasources/weather");
 
-// set env variables
-dotEnv.config({
-  path: process.env.NODE_ENV === "local" ? ".env.local" : ".env",
-});
-
 connection();
 
 const app = express();
 // app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 })); // Maximum file size is up to 10MB
-// app.use(express.static("public"));
+app.use(express.static("public"));
 // app.use(cors());
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
