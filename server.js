@@ -14,16 +14,12 @@ dotEnv.config({
   path: process.env.NODE_ENV === "local" ? ".env.local" : ".env",
 });
 
-console.log("ENV:", process.env.NODE_ENV);
-console.log("HOST:", process.env.HOST);
-console.log("MONGO_DB_URL:", process.env.MONGO_DB_URL);
-
 connection();
 
 const app = express();
-app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 })); // Maximum file size is up to 10MB
-app.use(express.static("public"));
-app.use(cors());
+// app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 })); // Maximum file size is up to 10MB
+// app.use(express.static("public"));
+// app.use(cors());
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
@@ -33,8 +29,8 @@ const apolloServer = new ApolloServer({
   dataSources: () => ({
     weatherAPI: new WeatherAPI(),
   }),
-  // introspection: true,
-  // playground: true,
+  introspection: true,
+  playground: true,
 });
 apolloServer.applyMiddleware({ app });
 
