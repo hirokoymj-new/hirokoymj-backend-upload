@@ -12,7 +12,8 @@ const WeatherAPI = require("./datasources/weather");
 connection();
 
 const app = express();
-// app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 })); // Maximum file size is up to 10MB
+app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 })); // Maximum file size is up to 10MB
+
 app.use(express.static("public"));
 app.use(cors());
 
