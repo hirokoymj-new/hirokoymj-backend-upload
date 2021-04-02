@@ -44,7 +44,7 @@ module.exports = {
 
       const newPhoto = new Photo({ fileName: randomName, location });
       const result = await newPhoto.save();
-      const url = `${process.env.HOST}images/${randomName}`;
+      const url = randomName;
 
       return {
         url,
